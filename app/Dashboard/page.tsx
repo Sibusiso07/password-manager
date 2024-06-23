@@ -24,7 +24,10 @@ export default function Passwords() {
   // Fetch the passwords
   const fetchPasswords = async () => {
     try {
-      
+      const response = await axios.get('../api/db');
+      // Logging the response for debugging purposes.
+      console.log(response); 
+      setPasswords(response.data); // Updating the password list state with fetched data.
     } catch (err) {
       console.error("Error fetching passwords: ", err);
     };
