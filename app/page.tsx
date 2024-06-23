@@ -16,17 +16,17 @@ export default function Home() {
   const handleLogin = async () => {
     try {
       // Send a POST request to the server with user credentials.
-      const response = await axios.post('/api/login', {
-        username: username,
-        password: password,
-      });
+      // const response = await axios.post('/api/login', {
+      //   username: username,
+      //   password: password,
+      // });
       // If login is successful, redirect the user to the Dashboard.
-      if (response.status === 200 && response.data.message === "Login Successful") {
+      // if (response.status === 200 && response.data.message === "Login Successful") {
         router.push('/Dashboard')
-      } else {
+      // } else {
         // If login fails, show an alert with the error message.
-        alert(response.data.message);
-      }
+        // alert(response.data.message);
+      // }
     } catch (error) {
       // Log any errors that occur during login.
       console.error('Error during login:', error);
