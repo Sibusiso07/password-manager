@@ -16,8 +16,9 @@ import Modal from "@/components/Modal";
 export default function Passwords() {
   const [passwords, setPasswords] = useState<any[] | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedPassword, setSelectedPassword] = useState<{
-    name: string;
+  const [selectedPasswordDetails, setSelectedPasswordDetails] = useState<{
+    website: string;
+    username: string;
     pass_word: string;
   } | null>(null);
 
@@ -34,14 +35,14 @@ export default function Passwords() {
     }
   };
 
-  const handleView = (password: { name: string; pass_word: string }) => {
-    setSelectedPassword(password);
+  const handleView = (passwordDetails: { website: string; username: string; pass_word: string }) => {
+    setSelectedPasswordDetails(passwordDetails);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedPassword(null);
+    setSelectedPasswordDetails(null);
   };  
 
   return (
@@ -55,20 +56,22 @@ export default function Passwords() {
           <TableHeader>
             <TableRow className="bg-white text-gray-900">
               <TableHead className="text-center">Website</TableHead>
+              <TableHead className="text-center">Username</TableHead>
               <TableHead className="text-center">Password</TableHead>
               <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {Array.isArray(passwords) &&
-              passwords.map((password) => (
-                <TableRow key={password.id} className="hover:bg-gray-200">
-                  <TableCell>{password.name}</TableCell>
-                  <TableCell>{password.pass_word}</TableCell>
+              passwords.map((passwordDetails) => (
+                <TableRow key={passwordDetails.id} className="hover:bg-gray-200">
+                  <TableCell>{passwordDetails.website}</TableCell>
+                  <TableCell>{passwordDetails.username}</TableCell>
+                  <TableCell>{passwordDetails.pass_word}</TableCell>
                   <TableCell>
                     <button
                       className="bg-sky-800 text-white py-1.5 px-2.5 rounded-md mt-2 hover:bg-sky-950"
-                      onClick={() => handleView(password)} // Pass password data to handleView
+                      onClick={() => handleView(passwordDetails)} // Pass password data to handleView
                     >
                       View
                     </button>
@@ -80,12 +83,12 @@ export default function Passwords() {
       </div>
       <div className="flex gap-5">
         <button className="bg-blue-600 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-900">
-          Add Password
+          Add New Password
         </button>
       </div>
 
       {/* Modal component */}
-      <Modal isOpen={showModal} onClose={handleCloseModal} password={selectedPassword} />
+      <Modal isOpen={showModal} onClose={handleCloseModal} passwordDetails={selectedPasswordDetails} />
     </div>
   );
 }

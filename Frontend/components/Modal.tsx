@@ -5,10 +5,10 @@ import React from "react";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  password: { name: string; pass_word: string } | null; // Assuming this structure based on your table data
+  passwordDetails: { website: string; username: string; pass_word: string } | null; // Assuming this structure based on your table data
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, password }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, passwordDetails }) => {
   if (!isOpen) return null;
 
   return (
@@ -39,11 +39,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, password }) => {
         <div className="mb-4">
           <p className="text-lg">
             <span className="font-bold text-white">Website: </span>
-            {password?.name}
+            {passwordDetails?.website}
+          </p>
+          <p className="text-lg">
+            <span className="font-bold text-white">Username: </span>
+            {passwordDetails?.username}
           </p>
           <p className="text-lg">
             <span className="font-bold text-white">Password: </span>
-            {password?.pass_word}
+            {passwordDetails?.pass_word}
           </p>
         </div>
       </div>
