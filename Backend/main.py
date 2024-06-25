@@ -1,22 +1,24 @@
+import os
+
 from flask import Flask, request, jsonify
 import psycopg2
 from psycopg2 import sql
+from dotenv import find_dotenv, load_dotenv
+
+# Find .env file
+path = find_dotenv()
+# Load data stored in the .env file
+load_dotenv(path)
 
 app = Flask(__name__)
-
-# Database configuration
-DB_HOST = "localhost"
-DB_NAME = "your_database_name"
-DB_USER = "your_database_user"
-DB_PASSWORD = "your_database_password"
 
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host=DB_HOST,
-        database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD
+        host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD')
     )
     return conn
 
